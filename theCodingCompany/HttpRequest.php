@@ -2,12 +2,12 @@
 
 /**
  * Intellectual Property of #Mastodon
- * 
+ *
  * @copyright (c) 2017, #Mastodon
  * @author V.A. (Victor) Angelier <victor@thecodingcompany.se>
  * @version 1.0
  * @license http://www.apache.org/licenses/GPL-compatibility.html GPL
- * 
+ *
  */
 
 namespace theCodingCompany;
@@ -19,7 +19,7 @@ final class HttpRequest {
 
     /**
      * Holds our base path. In most cases this is just /, but it can be /api for example
-     * @var type 
+     * @var type
      */
     private static $base_path = "/";
 
@@ -31,13 +31,13 @@ final class HttpRequest {
 
     /**
      * Holds our instance
-     * @var type 
+     * @var type
      */
     private static $instance = array();
 
     /**
      * Enable debugging
-     * @var type 
+     * @var type
      */
     private static $debug = false;
 
@@ -52,11 +52,11 @@ final class HttpRequest {
     }
 
     protected function __clone() {
-        
+
     }
 
     protected function __wakeup() {
-        
+
     }
 
     /**
@@ -103,7 +103,7 @@ final class HttpRequest {
     }
 
     /**
-     * Buikd the HTTP request
+     * Build the HTTP request
      * @param type $method  GET|POST
      * @param type $headers
      * @param type $parameters
@@ -129,26 +129,30 @@ final class HttpRequest {
         );
 
         //Check if we have parameters to post
-        if (count($parameters) > 0 && is_array($parameters)) {
-            $content = "";
-            foreach ($parameters as $k => $v) {
-                $content .= "&" . urlencode($k) . "=" . urlencode($v);
+        if (is_array($parameters)) {
+            if (count($parameters) > 0) {
+                $content = "";
+                foreach ($parameters as $k => $v) {
+                    $content .= "&" . urlencode($k) . "=" . urlencode($v);
+                }
+                //Strip first & sign
+                $opts["http"]["content"] = substr($content, 1);
             }
-            //Strip first & sign
-            $opts["http"]["content"] = substr($content, 1);
         } elseif ($parameters) {
             //Send as is
             $opts["http"]["content"] = $parameters;
         }
 
         //Check if we have headers to parse
-        if (count($headers) > 0 && is_array($headers)) {
-            $content = "";
-            foreach ($headers as $k => $v) {
-                $content .= "{$k}: {$v}\r\n";
+        if (is_array($headers)) {
+            if (count($headers) > 0) {
+                $content = "";
+                foreach ($headers as $k => $v) {
+                    $content .= "{$k}: {$v}\r\n";
+                }
+                //Strip first & sign
+                $opts["http"]["header"] = trim($content);
             }
-            //Strip first & sign
-            $opts["http"]["header"] = trim($content);
         }
         if ($opts["http"]["header"] === "") {
             unset($opts["http"]["header"]);
