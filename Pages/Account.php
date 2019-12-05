@@ -52,7 +52,23 @@ namespace IdnoPlugins\Mastodon\Pages {
                 $user = \Idno\Core\Idno::site()->session()->currentUser();
                 $tmp = explode('@', $this->getInput('username'));
                 $login = $this->getInput('login');
-                $server = $tmp[1];
+                $_server = $this->getInput('_server');
+                if(!empty($_server)) {
+                    $host = parse_url($_server, PHP_URL_HOST);
+                    $server = $host;
+                }
+                else {
+                    $server = $tmp[1];
+                }
+/*                if($host === $tmp[1] or empty($_server)) {
+                    $server = $tmp[1];
+                    $_server = $server;
+                } else {*/
+//                }
+                if($host !== $tmp[1]) {
+                  $tmp[0] = $this->getInput('username');
+                }
+
                 $user->mastodon[$this->getInput('username')] = array('server' => $server, 'login' => $login, 'username' => $tmp[0], 'bearer' => '');
                 $user->save();
 
