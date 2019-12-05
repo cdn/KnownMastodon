@@ -15,8 +15,6 @@ $user = Idno::site()->session()->currentUser();
         ?>
         <p><?= \Idno\Core\Idno::site()->language()->_('1. Enter your Mastodon instance’s user details:') ?></p>
         <form action="<?= $baseURL ?>account/mastodon/" class="form-horizontal" method="post">
-            <label for="login"><?= \Idno\Core\Idno::site()->language()->_('Mastodon login (email address)') ?></label>
-            <input type="email" class="form-control" name="login" id="login" placeholder="your@email.net" value="" />
             <label for="username"><?= \Idno\Core\Idno::site()->language()->_('Mastodon full username') ?></label>
             <input type="email" class="form-control" name="username" id="username" placeholder="yourNick@mastodon.social" value="" />
             <label for="server"><?= \Idno\Core\Idno::site()->language()->_('Mastodon server name') ?></label>
@@ -44,7 +42,6 @@ $user = Idno::site()->session()->currentUser();
                         <div class="social">
                             <form action="<?= $authUrl ?>"
                                   class="form-horizontal" method="post">
-                                <input type="text" class="form-control disabled" name="login" id="login" placeholder="your@email.net" disabled="disabled" value="<?= $account['login'] ?>" />
                                 <label for="username"><?= \Idno\Core\Idno::site()->language()->_('Mastodon full username') ?></label>
                                 <input type="text" class="form-control disabled" name="username" disabled="disabled" id="username" placeholder="yourNick@mastodon.social" value="<?= $account['username'] // . '@' . $server // ? ?>" />
                                 <label for="server"><?= \Idno\Core\Idno::site()->language()->_('Mastodon server name') ?></label>
@@ -106,8 +103,6 @@ $user = Idno::site()->session()->currentUser();
         ?>
         <p><?= \Idno\Core\Idno::site()->language()->_('1. Enter your Mastodon instance’s user details:') ?></p>
         <form action="<?= $baseURL ?>account/mastodon/" class="form-horizontal" method="post">
-            <label for="login"><?= \Idno\Core\Idno::site()->language()->_('Mastodon login (email address)') ?></label>
-            <input type="email" class="form-control" name="login" id="login" placeholder="your@email.net" value="" />
             <label for="username"><?= \Idno\Core\Idno::site()->language()->_('Mastodon full username') ?></label>
             <input type="email" class="form-control" name="username" id="username" placeholder="yourNick@mastodon.social" value="" />
             <label for="server"><?= \Idno\Core\Idno::site()->language()->_('Mastodon server name') ?></label>

@@ -48,10 +48,9 @@ namespace IdnoPlugins\Mastodon\Pages {
                 \Idno\Core\Idno::site()->session()->addMessage(\Idno\Core\Idno::site()->language()->_('%s instance settings have been removed from your account.', [$instance[1]]));
                 $this->forward(\Idno\Core\Idno::site()->config()->getDisplayURL() . 'account/mastodon/');
             }
-            if ($this->getInput('login') && $this->getInput('username')) {
+            if ($this->getInput('username') && $this->getInput('_server')) {
                 $user = \Idno\Core\Idno::site()->session()->currentUser();
                 $tmp = explode('@', $this->getInput('username'));
-                $login = $this->getInput('login');
                 $_server = $this->getInput('_server');
                 if(!empty($_server)) {
                     $host = parse_url($_server, PHP_URL_HOST);
@@ -69,7 +68,7 @@ namespace IdnoPlugins\Mastodon\Pages {
                   $tmp[0] = $this->getInput('username');
                 }
 
-                $user->mastodon[$this->getInput('username')] = array('server' => $server, 'login' => $login, 'username' => $tmp[0], 'bearer' => '');
+                $user->mastodon[$this->getInput('username')] = array('server' => $server, 'login' => 'n/a', 'username' => $tmp[0], 'bearer' => '');
                 $user->save();
 
                 $_SESSION['mastodon_instance'] = $this->getInput('username');
