@@ -23,8 +23,8 @@ msgid "Mastodon full username"
 msgstr ""
 
 #: ./templates/default/account/mastodon.tpl.php:22
-#msgid "Mastodon server name"
-#msgstr ""
+msgid "Mastodon server name"
+msgstr ""
 
 #: ./templates/default/account/mastodon.tpl.php:22
 #: ./templates/default/account/mastodon.tpl.php:48

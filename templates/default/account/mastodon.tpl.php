@@ -15,10 +15,10 @@ $user = Idno::site()->session()->currentUser();
         ?>
         <p><?= \Idno\Core\Idno::site()->language()->_('1. Enter your Mastodon instance’s user details:') ?></p>
         <form action="<?= $baseURL ?>account/mastodon/" class="form-horizontal" method="post">
-            <label for="login"><?= \Idno\Core\Idno::site()->language()->_('Mastodon login (email address)') ?></label>
-            <input type="email" class="form-control" name="login" id="login" placeholder="your@email.net" value="" />
             <label for="username"><?= \Idno\Core\Idno::site()->language()->_('Mastodon full username') ?></label>
             <input type="email" class="form-control" name="username" id="username" placeholder="yourNick@mastodon.social" value="" />
+            <label for="server"><?= \Idno\Core\Idno::site()->language()->_('Mastodon server name') ?></label>
+            <input type="url" class="form-control" name="_server" id="server" placeholder="https://mastodon.social" value="" />
             <button type="submit" class="btn btn-primary"><?= \Idno\Core\Idno::site()->language()->_('Save') ?></button>
             <?= \Idno\Core\Idno::site()->actions()->signForm('/account/mastodon/') ?>
         </form>
@@ -42,9 +42,10 @@ $user = Idno::site()->session()->currentUser();
                         <div class="social">
                             <form action="<?= $authUrl ?>"
                                   class="form-horizontal" method="post">
-                                <input type="text" class="form-control disabled" name="login" id="login" placeholder="your@email.net" disabled="disabled" value="<?= $account['login'] ?>" />
                                 <label for="username"><?= \Idno\Core\Idno::site()->language()->_('Mastodon full username') ?></label>
-                                <input type="text" class="form-control disabled" name="username" disabled="disabled" id="username" placeholder="yourNick@mastodon.social" value="<?= $account['username'] . '@' . $server ?>" />
+                                <input type="text" class="form-control disabled" name="username" disabled="disabled" id="username" placeholder="yourNick@mastodon.social" value="<?= $account['username'] // . '@' . $server // ? ?>" />
+                                <label for="server"><?= \Idno\Core\Idno::site()->language()->_('Mastodon server name') ?></label>
+                                <input type="text" class="form-control disabled" name="_server" disabled="disabled" id="server" placeholder="mastodon.social" value="<?= $server ?>" />
                                 <button type="submit" class="btn btn-primary" disabled="disabled"><?= \Idno\Core\Idno::site()->language()->_('Save') ?></button>
 
                                 <p>
@@ -55,7 +56,7 @@ $user = Idno::site()->session()->currentUser();
                                 </p>
                             </form>
                             <form action=. class="form-horizontal" method=post>
-                                <input type="hidden" name="remove" value="<?= $account['username'] . '@' . $server ?>"/>
+                                <input type="hidden" name="remove" value="<?= (strstr($account['username'], '@')) ? $account['username'] : $account['username'] . '@' . $server ?>"/>
                                 <button value="cancel" type="submit" name="cancel" class="btn btn-cancel"><?= \Idno\Core\Idno::site()->language()->_('Cancel') ?></button>
                                 <?= \Idno\Core\Idno::site()->actions()->signForm('/account/mastodon/') ?>
                             </form>
@@ -102,10 +103,10 @@ $user = Idno::site()->session()->currentUser();
         ?>
         <p><?= \Idno\Core\Idno::site()->language()->_('1. Enter your Mastodon instance’s user details:') ?></p>
         <form action="<?= $baseURL ?>account/mastodon/" class="form-horizontal" method="post">
-            <label for="login"><?= \Idno\Core\Idno::site()->language()->_('Mastodon login (email address)') ?></label>
-            <input type="email" class="form-control" name="login" id="login" placeholder="your@email.net" value="" />
             <label for="username"><?= \Idno\Core\Idno::site()->language()->_('Mastodon full username') ?></label>
             <input type="email" class="form-control" name="username" id="username" placeholder="yourNick@mastodon.social" value="" />
+            <label for="server"><?= \Idno\Core\Idno::site()->language()->_('Mastodon server name') ?></label>
+            <input type="url" class="form-control" name="_server" id="server" placeholder="https://mastodon.social" value="" />
             <button type="submit" class="btn btn-primary"><?= \Idno\Core\Idno::site()->language()->_('Save') ?></button>
             <?= \Idno\Core\Idno::site()->actions()->signForm('/account/mastodon/') ?>
         </form>
@@ -120,4 +121,61 @@ $user = Idno::site()->session()->currentUser();
     }
     ?>
 
+<script>
+$(document).ready(function() {
+
+  $.KnownMastodon = {
+
+  _m: function(event) {
+
+    var s = $('#server');
+
+    var t = event.target;
+
+    var axis;
+    var username = 'https://';
+    if(t.value.indexOf('@') != -1) {
+      axis = t.value.indexOf('@');
+      username=username + t.value.substring(axis+1);
+      s.val(username);
+    }
+
+  }
+
+  }
+
+  $('#username').change(function() {
+
+    $.KnownMastodon._m(event);
+    var t = event.target;
+    console.log('change' + ':' + t.value);
+
+  });
+
+  $('#username').keyup(function() {
+
+    $.KnownMastodon._m(event);
+    var t = event.target;
+    console.log('keyup' + ':' + t.value);
+
+  });
+
+  $('#username').mousedown(function() {
+
+    $.KnownMastodon._m(event);
+    var t = event.target;
+    console.log('mousedown' + ':' + t.value);
+
+  });
+
+  $('#username').select(function() {
+
+    $.KnownMastodon._m(event);
+    var t = event.target;
+    console.log('select' + ':' + t.value);
+
+  });
+
+});
+</script>
 </div>
