@@ -59,11 +59,6 @@ namespace IdnoPlugins\Mastodon\Pages {
                 else {
                     $server = $tmp[1];
                 }
-/*                if($host === $tmp[1] or empty($_server)) {
-                    $server = $tmp[1];
-                    $_server = $server;
-                } else {*/
-//                }
                 if($host !== $tmp[1]) {
                   $tmp[0] = $this->getInput('username');
                 }
