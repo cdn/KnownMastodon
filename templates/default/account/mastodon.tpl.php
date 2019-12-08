@@ -55,7 +55,7 @@ $user = Idno::site()->session()->currentUser();
                                     <?= \Idno\Core\Idno::site()->actions()->signForm('/account/mastodon/') ?>
                                 </p>
                             </form>
-                            <form action=. class="form-horizontal" method=post>
+                            <form action="<?= $baseURL ?>account/mastodon/" class="form-horizontal" method=post>
                                 <input type="hidden" name="remove" value="<?= (strstr($account['username'], '@')) ? $account['username'] : $account['username'] . '@' . $server ?>"/>
                                 <button value="cancel" type="submit" name="cancel" class="btn btn-cancel"><?= \Idno\Core\Idno::site()->language()->_('Cancel') ?></button>
                                 <?= \Idno\Core\Idno::site()->actions()->signForm('/account/mastodon/') ?>
@@ -85,7 +85,7 @@ $user = Idno::site()->session()->currentUser();
                              foreach($accounts as $account) {
                                $tmp = explode('@', $account['username']);
                         ?>
-                            <form action="<?= \Idno\Core\Idno::site()->config()->getDisplayURL() ?>account/mastodon/"
+                            <form action="<?= $baseURL ?>account/mastodon/"
                                   class="form-horizontal" method="post">
                               <div class="social">
                                 <p>
