@@ -42,6 +42,7 @@
                                  <?= \Idno\Core\Idno::site()->language()->_('ID: %s&hellip;', [substr($details[0]['client_id'], 0, 5)]) ?>
                             </p>
 
+                        <button class="btn btn-warning" type="submit"><?php echo \Idno\Core\Idno::site()->language()->_('Delete'); ?></button>
                         </div>
                     </div>
                     </form>
