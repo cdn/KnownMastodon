@@ -1,0 +1,18 @@
+{
+    "name": "danito/knownmastodon",
+    "type": "known-plugin",
+    "description": "Syndicate your status to Mastodon instances.",
+    "version": "0.4.1",
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require": {
+        "thecodingcompany/php-mastodon": "*",
+        "composer/installers": "~1.0"
+    },
+    "require-dev": {
+        "mapkyca/known-language-tools": "^1.0"
+    },
+    "extra": {
+        "installer-name": "Mastodon"
+    }
+}
