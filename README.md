@@ -20,7 +20,7 @@ Installation:
 
 * Save and rename KnownMastodon to IdnoPlugins/Mastodon
 
-* You need to run ``composer install`` or ``composer update`` if you're updating in the Twitter folder so PHP Composer will download and install the dependencies. (see "Vendor" folder)
+* You need to run ``composer install`` or ``composer update`` if you're updating in the Mastodon folder so PHP Composer will download and install the dependencies. (see "Vendor" folder)
 
 Activate under Site Configurations—Plugins
 
